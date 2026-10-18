@@ -1,23 +1,23 @@
 # HiPepTox
 
-**基于残基—原子异构图与多模态表征的多肽毒性预测框架。**
+**Peptide toxicity prediction with residue–atom heterogeneous graphs and multimodal representations.**
 
-HiPepTox 将多肽的原子信息、残基信息、蛋白质语言模型表征和残基级结构描述符相结合，通过分层图消息传递和后期融合完成毒性分类。本项目提供模型实现、训练入口、实验配置、基准数据及基线代码。
+HiPepTox combines atomic and residue information with protein language model embeddings and residue-level structural descriptors. Hierarchical message passing and late fusion integrate these representations for peptide toxicity classification. This repository provides model implementations, training and evaluation scripts, configurations, benchmark datasets, and baseline code.
 
-## 模型框架
+## Model overview
 
 ![HiPepTox framework](figures/HiPepTox_framework.png)
 
-HiPepTox 的计算流程包括四个部分：
+The framework comprises four stages:
 
-1. **残基—原子异构图构建**：将残基与重原子作为不同类型的节点，编码原子连接、原子与残基的对应关系及残基之间的关系。
-2. **分层消息传递**：在原子与残基两个层次聚合信息，得到多肽的图表征。
-3. **语言模型与结构表征**：使用 ESM2-t30-150M 的第 28、29、30 层残基表征均值，结合每个残基的 45 维结构描述符，形成辅助表征。
-4. **后期融合与分类**：融合图分支和辅助分支的输出，通过分类器预测多肽的毒性类别。
+1. **Residue–atom heterogeneous graph construction:** represent residues and heavy atoms as distinct node types, with covalent bonds, atom-to-residue membership, and residue adjacency relations.
+2. **Hierarchical message passing:** aggregate information at the atomic and residue levels to obtain a peptide-level graph representation.
+3. **Sequence and structural representation:** average residue embeddings from layers 28, 29, and 30 of ESM2-t30-150M and combine them with 45 structural descriptors per residue.
+4. **Late fusion and classification:** concatenate the independently encoded branch representations and pass them to the classification head.
 
-模型代码位于 [model/hipeptox.py](model/hipeptox.py)。配置中的模型类名为 `HiPepTox`。
+The model is implemented in [model/hipeptox.py](model/hipeptox.py). Its configuration class name is `HiPepTox`.
 
-## 目录结构
+## Repository structure
 
 ```text
 .
@@ -58,49 +58,49 @@ HiPepTox 的计算流程包括四个部分：
     └── processed/
 ```
 
-| 路径 | 内容 |
+| Path | Contents |
 | --- | --- |
-| `model/` | HiPepTox 模型与基线实现 |
-| `configs/reproduction/` | CD-HIT 0.8 和 0.9 主模型配置 |
-| `configs/single_task/` | 主模型及消融配置 |
-| `scripts/` | 模型训练及特征处理入口 |
-| `util/` | 图构建、数据集、训练任务及指标工具 |
-| `data/raw/` | 原始序列与标签数据 |
-| `data/processed/` | 整理后的 CSV、固定数据划分及结构样本映射 |
-| `figures/` | 模型框架图 |
+| `model/` | HiPepTox and baseline implementations |
+| `configs/reproduction/` | Main-model configurations for CD-HIT 0.8 and 0.9 |
+| `configs/single_task/` | Main-model and ablation configurations |
+| `scripts/` | Training, evaluation, and feature preparation scripts |
+| `util/` | Graph construction, datasets, training tasks, and metrics |
+| `data/raw/` | Source sequence and label files, with a provenance catalogue |
+| `data/processed/` | CSV datasets, fixed splits, and structure mappings |
+| `figures/` | Model architecture figure |
 
-## 环境与安装
+## Installation
 
-项目声明的主要依赖如下，完整列表见 [requirements.txt](requirements.txt) 和 [pyproject.toml](pyproject.toml)。
+The main project declares the following dependencies. See [requirements.txt](requirements.txt) and [pyproject.toml](pyproject.toml) for the full lists.
 
-| 依赖 | 项目声明 |
+| Dependency | Declared requirement |
 | --- | --- |
 | Python | ≥ 3.10 |
 | PyTorch | ≥ 1.12 |
 | TorchDrug | 0.2.1 |
-| NumPy | ≥ 1.21 且 < 2 |
-| 其他 | pandas、SciPy、scikit-learn、PyYAML、Jinja2、tqdm、easydict、ninja |
+| NumPy | ≥ 1.21 and < 2 |
+| Other packages | pandas, SciPy, scikit-learn, PyYAML, Jinja2, tqdm, easydict, ninja |
 
-以下命令均在项目根目录执行：
+Run the following commands from the repository root:
 
 ```bash
+git clone https://github.com/ToxPepPred/HiPepTox.git
+cd HiPepTox
 python -m pip install -r requirements.txt
 python -m pip install --no-deps --no-build-isolation -e .
 export PYTHONPATH="$PWD"
 ```
 
-PyTorch、CUDA 与 TorchDrug 的扩展依赖应使用匹配的运行环境。各基线的额外依赖以其目录中的 `requirements.txt`、`environment.yml` 和 [registry.json](model/baseline/registry.json) 为准。
+Use compatible versions of PyTorch, CUDA, and the compiled dependencies required by TorchDrug. Baselines have additional requirements, documented in their own `requirements.txt` or `environment.yml` files and the [baseline registry](model/baseline/registry.json).
 
-## 数据集
+## Datasets
 
-主模型使用 CD-HIT 0.8 和 0.9 两套基准数据。内部集的训练与验证划分已写入 CSV 的 `split` 列；外部测试集单独存放。
+The main model uses the ToxiPep CD-HIT 0.8 and 0.9 benchmarks. Training and validation assignments are stored in the internal CSV files; each held-out benchmark test set is stored separately.
 
-| 基准数据 | 训练样本 | 验证样本 | 测试样本 | 总计 |
+| Benchmark | Training | Validation | Test | Total |
 | --- | ---: | ---: | ---: | ---: |
 | CD-HIT 0.8 | 4,712 | 832 | 1,388 | 6,932 |
 | CD-HIT 0.9 | 5,998 | 1,058 | 1,766 | 8,822 |
-
-对应目录：
 
 ```text
 data/processed/
@@ -110,27 +110,49 @@ data/processed/
 └── toxipep09_external_test/
 ```
 
-各目录的主数据文件为 `peptide_toxicity.csv`，主要字段如下：
+Each directory contains `peptide_toxicity.csv` with the following fields:
 
-| 字段 | 含义 |
+| Field | Description |
 | --- | --- |
-| `id` | 样本标识 |
-| `sequence` | 多肽氨基酸序列 |
-| `toxicity` | 二分类标签：`1` 为毒性，`0` 为非毒性 |
-| `split` | `train`、`validation` 或 `test` |
-| `source` | 数据来源 |
-| `orig_record_id`、`header` | 原始记录的追溯信息 |
+| `id` | Sample identifier |
+| `sequence` | Peptide amino acid sequence |
+| `toxicity` | Binary label: `1` for toxic and `0` for non-toxic |
+| `split` | `train`, `validation`, or `test` |
+| `source` | Data source |
+| `orig_record_id`, `header` | Identifiers retained from the source records |
 
-结构映射文件 `peptide_toxicity_structoxnet_mapping.csv` 记录样本与结构标识之间的对应关系。实验应沿用 CSV 中已有的划分。
+The accompanying `peptide_toxicity_structoxnet_mapping.csv` files map samples to structure identifiers. Use the existing CSV splits when running experiments. Source repositories and dataset provenance are listed in [data/raw/sources.csv](data/raw/sources.csv).
 
-## 主模型训练
+## Feature preparation
 
-两套数据的训练配置分别位于：
+Main-model training requires ESM2 embeddings and residue-level structural features. Trained weights and generated feature caches are not bundled with this release.
+
+| Input | Path for CD-HIT 0.9 |
+| --- | --- |
+| ESM2 embeddings | `data/processed/toxipep09_esm2_t28_29_30_mean_embeddings.pt` |
+| Internal structural features | `data/processed/structure/cdhit09_internal.pt` |
+| Test structural features | `data/processed/structure/cdhit09_external.pt` |
+
+Prepare predicted structures and a cache containing `pdb/`, `dssp/`, and `pdb2rr/` records. The [baseline resource guide](model/baseline/PREPARATION.md) describes the available structure-processing scripts. Once these records are ready, the following example extracts ESM2 embeddings and builds the internal structural features:
+
+```bash
+bash scripts/features.sh cdhit09 \
+  --device cuda \
+  --structure-map data/processed/toxipep09_internal_85_15/peptide_toxicity_structoxnet_mapping.csv \
+  --structure-cache /path/to/internal_structure_cache \
+  --structure-output data/processed/structure/cdhit09_internal.pt
+```
+
+Repeat with the test mapping, its structure cache, and `cdhit09_external.pt` as the output to prepare test features. For CD-HIT 0.8, use the corresponding `toxipep08` and `cdhit08` paths. Run `bash scripts/features.sh --help` for all options.
+
+## Training HiPepTox
+
+The main configurations are:
 
 - [configs/reproduction/cdhit08.yaml](configs/reproduction/cdhit08.yaml)
 - [configs/reproduction/cdhit09.yaml](configs/reproduction/cdhit09.yaml)
 
-### 训练命令
+### Commands
 
 ```bash
 # CD-HIT 0.9
@@ -139,75 +161,77 @@ bash scripts/train_seeds.sh cdhit09 '[0]'
 # CD-HIT 0.8
 bash scripts/train_seeds.sh cdhit08 '[0]'
 
-# 依次运行两套数据
+# Run both benchmarks sequentially
 bash scripts/train_seeds.sh all '[0]'
 ```
 
-`'[0]'` 表示使用 GPU 0；CPU 模式使用 `null`。第三个参数可指定输出根目录，默认值为 `outputs/reproduction`。
+`'[0]'` selects GPU 0; use `null` for CPU execution. The script runs seeds 0, 3407, and 2024 sequentially. An optional third argument sets the output directory; its default is `outputs/reproduction`.
 
 ```bash
 bash scripts/train_seeds.sh cdhit09 null outputs/reproduction_cpu
 ```
 
-### 默认训练设置
+### Default training settings
 
-| 参数 | 当前主模型配置 |
+| Parameter | Main-model configuration |
 | --- | --- |
-| 训练轮数 | 50 |
+| Epochs | 50 |
 | Batch size | 128 |
-| 优化器 | Adam |
-| 学习率 | 0.0005 |
+| Optimizer | Adam |
+| Learning rate | 0.0005 |
 | Weight decay | 0.001 |
-| 学习率调度 | CosineAnnealingLR，`T_max=50` |
-| 选模指标 | 验证集 Macro F1 |
+| Learning-rate scheduler | CosineAnnealingLR, `T_max=50` |
+| Checkpoint selection | Validation macro F1 |
 
-网络和分类头的具体设置以各 YAML 配置为准。每轮训练后评估验证集，并保存验证集指标最优的模型。
+Network and classification-head settings are defined separately in each YAML file. The training script evaluates the validation set after each epoch and saves the checkpoint with the best configured validation metric.
 
-### 训练输出
+### Generated outputs
 
-每次训练生成独立的运行目录，保存以下文件：
+Each training run creates a separate output directory:
 
-| 文件 | 内容 |
+| File | Contents |
 | --- | --- |
-| `resolved_config.yaml` | 本次运行的完整配置 |
-| `run_metadata.json` | 运行信息 |
-| `validation_history.csv` | 每轮验证集指标 |
-| `best_checkpoint.json` | 验证集选模记录 |
-| `best_valid_epoch_<N>.pth` | 验证集指标最优的模型 |
-| `model_epoch_<N>.pth` | 各轮训练模型 |
+| `resolved_config.yaml` | Resolved run configuration |
+| `run_metadata.json` | Run metadata |
+| `validation_history.csv` | Per-epoch validation metrics |
+| `best_checkpoint.json` | Validation-based checkpoint selection record |
+| `best_valid_epoch_<N>.pth` | Best validation checkpoint |
+| `model_epoch_<N>.pth` | Per-epoch checkpoints |
 
-## 基线模型
+## Baselines
 
-基线代码位于 [model/baseline/](model/baseline/)。
+Baseline implementations are provided in [model/baseline/](model/baseline/).
 
-| 方法 | 目录 | 主要入口 |
+| Method | Directory | Entry point |
 | --- | --- | --- |
 | ToxiPep | `toxipep/` | [Code/train_eval_csv.py](model/baseline/toxipep/Code/train_eval_csv.py) |
-| ToxTeller（LR / RF / SVM / XGBoost） | `toxteller/` | [program_resource/train_eval_csv.py](model/baseline/toxteller/program_resource/train_eval_csv.py) |
+| ToxTeller: LR, RF, SVM, XGBoost | `toxteller/` | [program_resource/train_eval_csv.py](model/baseline/toxteller/program_resource/train_eval_csv.py) |
 | ToxMSRC | `toxmsrc/` | [scripts/train_eval_csv_torch.py](model/baseline/toxmsrc/scripts/train_eval_csv_torch.py) |
 | PLPTP | `plptp/` | [scripts/train_eval_csv.py](model/baseline/plptp/scripts/train_eval_csv.py) |
 | CAPTP | `captp/` | [scripts/train_eval_csv.py](model/baseline/captp/scripts/train_eval_csv.py) |
 | tAMPer | `tamper/` | [scripts/train_tamper_csv.py](model/baseline/tamper/scripts/train_tamper_csv.py) |
 | ToxGIN | `toxgin/` | [scripts/train_toxgin_csv.py](model/baseline/toxgin/scripts/train_toxgin_csv.py) |
-| PeptiTox | `peptitox/` | [train_cached_external.py](model/baseline/peptitox/train_cached_external.py) |
-| StrucToxNet | `structoxnet/` | [scripts/train_csv.py](model/baseline/structoxnet/scripts/train_csv.py)；[scripts/evaluate_csv.py](model/baseline/structoxnet/scripts/evaluate_csv.py) |
-| ToxinPred3 | `toxinpred3/` | [scripts/evaluate_csv.py](model/baseline/toxinpred3/scripts/evaluate_csv.py)；作者发布实现 |
+| PeptiTox | `peptitox/` | [train_cached.py](model/baseline/peptitox/train_cached.py) |
+| StrucToxNet | `structoxnet/` | [scripts/train_csv.py](model/baseline/structoxnet/scripts/train_csv.py), [scripts/evaluate_csv.py](model/baseline/structoxnet/scripts/evaluate_csv.py) |
+| ToxinPred3 | `toxinpred3/` | [scripts/evaluate_csv.py](model/baseline/toxinpred3/scripts/evaluate_csv.py), using the released implementation |
 
-各方法使用自己的模型实现和参数接口。入口索引见 [registry.json](model/baseline/registry.json)，运行所需资源见 [基线资源准备](model/baseline/PREPARATION.md)。
+Each method retains its own implementation and parameter interface. See the [registry](model/baseline/registry.json) for entry points and the [resource preparation guide](model/baseline/PREPARATION.md) for required inputs and external resources.
 
-## 主要脚本
+## Main scripts
 
-| 脚本 | 用途 |
+| Script | Purpose |
 | --- | --- |
-| `scripts/train.py` | 按 YAML 配置训练单个模型 |
-| `scripts/train_seeds.sh` | 主模型多种子训练 |
-| `scripts/extract_plm.py` | 蛋白质语言模型表征提取 |
-| `scripts/structure_features.py` | 45 维残基级结构描述符计算 |
-| `scripts/prepare_structure_inputs.py` | DSSP 表与残基接触记录处理 |
-| `scripts/build_contacts.py` | 基于 PDB 的残基接触边计算 |
-| `scripts/csv_to_fasta.py` | CSV 序列导出为 FASTA |
-| `scripts/ensemble.py` | 模型集成 |
+| `scripts/train.py` | Train a model from a YAML configuration |
+| `scripts/train_seeds.sh` | Run main-model training across seeds |
+| `scripts/features.sh` | Prepare ESM2 embeddings and structural feature inputs |
+| `scripts/extract_plm.py` | Extract protein language model embeddings |
+| `scripts/structure_features.py` | Compute 45-dimensional residue structural descriptors |
+| `scripts/prepare_structure_inputs.py` | Prepare DSSP and residue-contact records |
+| `scripts/build_contacts.py` | Compute residue-contact edges from PDB files |
+| `scripts/csv_to_fasta.py` | Export CSV sequences to FASTA |
+| `scripts/evaluate.py` | Evaluate a trained model |
+| `scripts/ensemble.py` | Combine model predictions |
 
-## 许可
+## License
 
-HiPepTox 项目代码使用 [MIT License](LICENSE)。整合的第三方基线代码适用各自目录中的许可条款。
+HiPepTox project code is distributed under the [MIT License](LICENSE). Third-party baseline implementations retain their respective licensing terms and source notices.

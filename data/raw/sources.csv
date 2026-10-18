@@ -1,0 +1,35 @@
+project,repository,original_path,packaged_path,description,packaged
+CAPTP,https://github.com/jiaoshihu/CAPTP,CAPTP/data/train_data.txt,data/raw/CAPTP/data/train_data.txt,Training set,true
+CAPTP,https://github.com/jiaoshihu/CAPTP,CAPTP/data/test1.txt,data/raw/CAPTP/data/test1.txt,Independent test set 1,true
+CAPTP,https://github.com/jiaoshihu/CAPTP,CAPTP/data/test2.txt,data/raw/CAPTP/data/test2.txt,Independent test set 2,true
+StrucToxNet,https://github.com/jiaoshihu/StrucToxNet,StrucToxNet/data/train_data.txt,data/raw/StrucToxNet/data/train_data.txt,Training set,true
+StrucToxNet,https://github.com/jiaoshihu/StrucToxNet,StrucToxNet/data/test_data.txt,data/raw/StrucToxNet/data/test_data.txt,Test set,true
+StrucToxNet,https://github.com/jiaoshihu/StrucToxNet,StrucToxNet/data/all_peptides.txt,data/raw/StrucToxNet/data/all_peptides.txt,Complete peptide sequence collection,true
+StrucToxNet,https://github.com/jiaoshihu/StrucToxNet,StrucToxNet/data/all_peptides_cdhit0.9.txt,data/raw/StrucToxNet/data/all_peptides_cdhit0.9.txt,Peptide sequences after CD-HIT 0.9 redundancy reduction,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Raw data/train_data.fasta,data/raw/ToxMSRC/Raw data/train_data.fasta,Original training sequences,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Raw data/test1.fasta,data/raw/ToxMSRC/Raw data/test1.fasta,Original test set 1 sequences,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Raw data/test2.fasta,data/raw/ToxMSRC/Raw data/test2.fasta,Original test set 2 sequences,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Raw data/y_train.csv,data/raw/ToxMSRC/Raw data/y_train.csv,Training labels,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Raw data/y_test1.csv,data/raw/ToxMSRC/Raw data/y_test1.csv,Test set 1 labels,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Raw data/y_test2.csv,data/raw/ToxMSRC/Raw data/y_test2.csv,Test set 2 labels,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Raw data/X.rar,data/raw/ToxMSRC/Raw data/X.rar,Original Word2Vec feature archive,false
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Example data/example_train.fasta,data/raw/ToxMSRC/Example data/example_train.fasta,Example training sequences,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Example data/example_test.fasta,data/raw/ToxMSRC/Example data/example_test.fasta,Example test sequences,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Example data/example_train.csv,data/raw/ToxMSRC/Example data/example_train.csv,Example training feature table,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Example data/example_test.csv,data/raw/ToxMSRC/Example data/example_test.csv,Example test feature table,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Example data/exampley_train.csv,data/raw/ToxMSRC/Example data/exampley_train.csv,Example training labels,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Example data/exampley_test.csv,data/raw/ToxMSRC/Example data/exampley_test.csv,Example test labels,true
+ToxMSRC,https://github.com/Renjingyi123/ToxMSRC,ToxMSRC/Example data/example_X.npz,data/raw/ToxMSRC/Example data/example_X.npz,Example feature matrix,false
+ToxiPep,https://github.com/GGCL7/ToxiPep,ToxiPep/Dataset/0.8/train.txt,data/raw/ToxiPep/Dataset/0.8/train.txt,CD-HIT 0.8 training pool,true
+ToxiPep,https://github.com/GGCL7/ToxiPep,ToxiPep/Dataset/0.8/test.txt,data/raw/ToxiPep/Dataset/0.8/test.txt,CD-HIT 0.8 test set,true
+ToxiPep,https://github.com/GGCL7/ToxiPep,ToxiPep/Dataset/0.9/train.txt,data/raw/ToxiPep/Dataset/0.9/train.txt,CD-HIT 0.9 training pool,true
+ToxiPep,https://github.com/GGCL7/ToxiPep,ToxiPep/Dataset/0.9/test.txt,data/raw/ToxiPep/Dataset/0.9/test.txt,CD-HIT 0.9 test set,true
+ToxiPep,https://github.com/GGCL7/ToxiPep,ToxiPep/Dataset/Independent set/independent test set.txt,data/raw/ToxiPep/Dataset/Independent set/independent test set.txt,Independent test set,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/sequences/tr_pos.faa,data/raw/tAMPer/data/sequences/tr_pos.faa,Toxic training sequences,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/sequences/tr_neg.faa,data/raw/tAMPer/data/sequences/tr_neg.faa,Non-toxic training sequences,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/sequences/val_pos.faa,data/raw/tAMPer/data/sequences/val_pos.faa,Toxic validation sequences,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/sequences/val_neg.faa,data/raw/tAMPer/data/sequences/val_neg.faa,Non-toxic validation sequences,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/sequences/seqs.faa,data/raw/tAMPer/data/sequences/seqs.faa,Example prediction sequences,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/structures/toxic_dbaasp_1_AMD.pdb,data/raw/tAMPer/data/structures/toxic_dbaasp_1_AMD.pdb,Example prediction structure,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/tr_structures/toxic_dbaasp_1_AMD.pdb,data/raw/tAMPer/data/tr_structures/toxic_dbaasp_1_AMD.pdb,Example training structure,true
+tAMPer,https://github.com/BirolLab/tAMPer,tAMPer/data/val_structures/toxic_dbaasp_1_AMD.pdb,data/raw/tAMPer/data/val_structures/toxic_dbaasp_1_AMD.pdb,Example validation structure,true

@@ -1,30 +1,30 @@
 # StrucToxNet baseline
 
-本目录整合 StrucToxNet 模型源码、原始预处理代码，以及本项目已有的 CSV 训练和评估入口。
-模型实现保持原样；CSV 接口沿用原工程的实现，仅将 DSSP 默认位置改为从 PATH 查找，亦可用 `--mkdssp` 显式指定。
-源码快照及文件校验值见 [SOURCE.json](SOURCE.json)，原作者说明见 [README.upstream.md](README.upstream.md)。
+This directory integrates the StrucToxNet model source, original preprocessing scripts, and the project's existing CSV training and evaluation interfaces. The model implementation is unchanged. The CSV interfaces retain their existing implementation, with the default DSSP executable resolved from `PATH`; an explicit path can also be supplied through `--mkdssp`.
 
-## 文件
+See [SOURCE.json](SOURCE.json) for source-snapshot information and file checksums, and [README.upstream.md](README.upstream.md) for the upstream instructions.
 
-| 路径 | 用途 |
+## Files
+
+| Path | Purpose |
 | --- | --- |
-| `model/StrucToxNet.py` | EGNN 模型与分类器 |
-| `scripts/train_csv.py` | 按 CSV 的 train/validation 划分训练并选择验证集最优模型 |
-| `scripts/evaluate_csv.py` | 固定权重评估、指标与逐样本预测导出 |
-| `Preprocessing/` | 原始结构、接触及 ProtT5 特征处理脚本 |
-| `Preprocessing/inputs/x_min.npy`、`x_max.npy` | 原工程的静态 ProtT5 归一化数组 |
-| `configuration/`、`preprocess/`、`util/` | 原始配置、数据加载与指标工具 |
-| `main.py` | 原作者的预测入口，使用其 README 中约定的相对路径与资源 |
-| `environment.yml` | 原始环境文件 |
-| `requirements.txt` | CSV 接口所需的主要 Python 依赖 |
+| `model/StrucToxNet.py` | EGNN model and classifier |
+| `scripts/train_csv.py` | Train using CSV train/validation splits and select the best validation checkpoint |
+| `scripts/evaluate_csv.py` | Evaluate fixed weights and export metrics and per-sample predictions |
+| `Preprocessing/` | Original structure, contact, and ProtT5 feature-processing scripts |
+| `Preprocessing/inputs/x_min.npy`, `x_max.npy` | Original static ProtT5 normalization arrays |
+| `configuration/`, `preprocess/`, `util/` | Original configuration, data-loading, and metric utilities |
+| `main.py` | Upstream prediction entry point, using its documented relative paths and resources |
+| `environment.yml` | Original environment specification |
+| `requirements.txt` | Main Python dependencies for the CSV interfaces |
 
-## 环境和资源
+## Environment and resources
 
-CSV 接口使用 Python 3.10 或更新版本。先安装与运行平台匹配的 PyTorch、PyG、torch-scatter 和 torch-cluster，再安装其余依赖。
-ProtT5、ESMFold 与 mkdssp 由使用者在环境中单独准备，并通过相应参数传入。归一化数组已随代码保留。
-大模型文件、训练权重、PDB/DSSP/PLM 缓存和历史预测结果均不随本精简包复制。
+The CSV interfaces require Python 3.10 or later. Install PyTorch, PyG, torch-scatter, and torch-cluster versions compatible with the execution platform, followed by the remaining dependencies.
 
-以下命令从 `push_paper/model/baseline/structoxnet` 目录运行：
+Prepare ProtT5, ESMFold, and `mkdssp` separately and supply their locations through the corresponding arguments. The normalization arrays are included. Large language-model files, trained checkpoints, PDB/DSSP/PLM caches, and historical predictions are not bundled.
+
+Run the following commands from `model/baseline/structoxnet/`:
 
 ```bash
 PROJECT_ROOT=$(cd ../../.. && pwd)
@@ -54,9 +54,10 @@ python scripts/evaluate_csv.py \
   --device cuda
 ```
 
-CD-HIT 0.8 对应将数据目录中的 `toxipep09` 换为 `toxipep08`，并为输出使用独立的 `cdhit08` 目录。
-可用 `python scripts/train_csv.py --help` 和 `python scripts/evaluate_csv.py --help` 查看全部参数。
-上述 StrucToxNet 示例使用验证集 Accuracy 选模，与正文表 2 对应的历史比较记录保持一致。脚本支持用 --select-metric 选择其他指标；CLI 的通用默认值为 MCC。其余模型超参数由显式命令参数确定。
+For CD-HIT 0.8, replace `toxipep09` with `toxipep08` in the input paths and use a separate `cdhit08` output directory. Run `python scripts/train_csv.py --help` or `python scripts/evaluate_csv.py --help` for all arguments.
 
-原始分步预处理脚本按 `README.upstream.md` 从 `Preprocessing/` 目录执行；CSV 入口负责自己的缓存目录。
-本次整合保留源码中的原作者署名；来源快照没有单独的 LICENSE 文件，该情况记录在 SOURCE.json 中。
+The example explicitly selects checkpoints by validation Accuracy, matching the historical comparison corresponding to manuscript Table 2. Other selection metrics can be supplied through `--select-metric`; the generic CLI default is MCC. Remaining hyperparameters are controlled by the training arguments.
+
+Follow `README.upstream.md` when running the original preprocessing stages from `Preprocessing/`. The CSV interfaces manage their own cache directories.
+
+Original author credits are retained in the source. The source snapshot did not contain a separate LICENSE file; this is recorded in `SOURCE.json`.

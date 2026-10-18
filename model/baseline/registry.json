@@ -10,7 +10,7 @@
         123,
         2024
       ],
-      "selection": "存在验证集 ACC 与外部测试 ACC 扫描两类历史流程；本代码包不包含相应运行记录",
+      "selection": "Historical workflows include validation-Accuracy selection and external-test-Accuracy scanning; the corresponding run records are not included in this code release.",
       "entry": "Code/train_eval_csv.py",
       "dependencies": "PyTorch、RDKit、NumPy、pandas、scikit-learn",
       "bundled_weights": false,
@@ -23,9 +23,9 @@
         123,
         2024
       ],
-      "selection": "已拟合的 LR、RF、SVM、XGBoost",
+      "selection": "Fitted LR, RF, SVM, and XGBoost classifiers",
       "entry": "program_resource/train_eval_csv.py",
-      "dependencies": "scikit-learn、XGBoost、NumPy、pandas；配套保存的 scaler",
+      "dependencies": "scikit-learn, XGBoost, NumPy, pandas; a fitted scaler is required for inference",
       "bundled_weights": false,
       "directory": "toxteller"
     },
@@ -36,9 +36,9 @@
         123,
         2024
       ],
-      "selection": "PyTorch 历史汇总按验证集 ACC",
+      "selection": "Historical PyTorch summaries used validation Accuracy",
       "entry": "scripts/train_eval_csv_torch.py",
-      "dependencies": "PyTorch、NumPy、pandas、scikit-learn；Word2Vec 特征生成需 gensim；原 Keras 路线另需 TensorFlow",
+      "dependencies": "PyTorch, NumPy, pandas, scikit-learn; Word2Vec feature generation requires gensim; the original Keras workflow also requires TensorFlow",
       "bundled_weights": false,
       "directory": "toxmsrc"
     },
@@ -49,9 +49,9 @@
         123,
         2024
       ],
-      "selection": "主要汇总按验证集 ACC",
+      "selection": "Main summaries used validation Accuracy",
       "entry": "scripts/train_eval_csv.py",
-      "dependencies": "PyTorch、transformers、NumPy、pandas、scikit-learn；本地模型配置在 local_models/",
+      "dependencies": "PyTorch, transformers, NumPy, pandas, scikit-learn; local model definitions are in local_models/",
       "bundled_weights": false,
       "directory": "plptp"
     },
@@ -65,9 +65,9 @@
         777,
         3407
       ],
-      "selection": "主要统计按验证集 MCC",
+      "selection": "Main summaries used validation MCC",
       "entry": "scripts/train_eval_csv.py",
-      "dependencies": "PyTorch、NumPy、pandas、scikit-learn；配套 AAindex 在 data/",
+      "dependencies": "PyTorch, NumPy, pandas, scikit-learn; the accompanying AAindex vocabulary is in data/",
       "bundled_weights": false,
       "directory": "captp"
     },
@@ -78,7 +78,7 @@
         3407,
         2024
       ],
-      "selection": "验证集 ACC",
+      "selection": "Validation Accuracy",
       "entry": "scripts/train_tamper_csv.py",
       "dependencies": "PyTorch、PyG、torch-scatter、torch-cluster、fair-esm、Biopython、mkdssp",
       "bundled_weights": false,
@@ -91,18 +91,18 @@
         42,
         2024
       ],
-      "selection": "验证集 ACC",
+      "selection": "Validation Accuracy",
       "entry": "scripts/train_toxgin_csv.py",
-      "dependencies": "PyTorch、DGL、transformers、tokenizers、Biopandas、NumPy、pandas、scikit-learn；可选 PyG 入口另需 PyG",
+      "dependencies": "PyTorch, DGL, transformers, tokenizers, Biopandas, NumPy, pandas, scikit-learn; the optional PyG interface also requires PyG",
       "bundled_weights": false,
       "directory": "toxgin"
     },
     "toxinpred3": {
       "name": "ToxinPred3",
       "seeds": [],
-      "selection": "发布模型评估；阈值通过入口参数指定",
+      "selection": "Evaluation of the released model; the threshold is specified through interface arguments",
       "entry": "toxinpred3.py",
-      "dependencies": "scikit-learn、NumPy、pandas；motif 模式另需相关工具",
+      "dependencies": "scikit-learn, NumPy, pandas; motif modes require additional tools",
       "bundled_weights": false,
       "directory": "toxinpred3"
     },
@@ -117,8 +117,8 @@
       "directory": "structoxnet",
       "entry": "scripts/train_csv.py",
       "evaluation_entry": "scripts/evaluate_csv.py",
-      "selection": "论文表 2 对应历史比较使用验证集 Accuracy；由 --select-metric 显式指定，CSV 通用 CLI 默认值为 MCC",
-      "dependencies": "PyTorch、PyG、torch-scatter、torch-cluster、transformers、ProtT5、ESMFold、Biopython、mkdssp；见 structoxnet/requirements.txt 与 environment.yml",
+      "selection": "The historical comparison corresponding to manuscript Table 2 used validation Accuracy, explicitly supplied through --select-metric; the generic CSV CLI default is MCC",
+      "dependencies": "PyTorch, PyG, torch-scatter, torch-cluster, transformers, ProtT5, ESMFold, Biopython, mkdssp; see structoxnet/requirements.txt and environment.yml",
       "bundled_weights": false,
       "source_manifest": "structoxnet/SOURCE.json"
     }

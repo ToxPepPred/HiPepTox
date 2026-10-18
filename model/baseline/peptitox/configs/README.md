@@ -1,14 +1,14 @@
 # Reproduction configurations
 
-Six YAML files correspond to CD-HIT 0.8 / 0.9 and seeds 42, 2024, 3407. Parameters were recovered from each historical checkpoint; input/cache paths target Paper and new outputs go to results/peptitox/<dataset>/seed<seed>.
+Six YAML files cover CD-HIT 0.8 and 0.9 with seeds 42, 2024, and 3407. Parameters were recovered from the corresponding historical checkpoints. Relative input/cache paths are resolved from the repository root; new outputs go to `results/peptitox/<dataset>/seed<seed>`.
 
-Run from the Paper root:
+Run from the repository root:
 
 ```bash
 python model/baseline/peptitox/train_cached.py \
   --config model/baseline/peptitox/configs/cdhit09_seed42.yaml --device cpu
 ```
 
-CLI options override YAML values, e.g. --device cpu. With a config, relative data/output paths are anchored to Paper, including CLI path overrides. The configurations retain training parameters and model input dimensions; each run selects its checkpoint by internal validation MCC.
+Command-line arguments override configuration values, including path arguments. The configurations retain training parameters and model input dimensions. Each run selects its checkpoint using internal validation MCC.
 
-These files recover saved settings; they do not assert bitwise reproduction across different devices or dependency versions.
+These files recover saved settings; they do not assert bitwise reproduction across devices or dependency versions.

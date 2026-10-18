@@ -1,22 +1,19 @@
-# 多肽毒性总数据集
+# Source datasets
 
-这个目录用于集中存放当前工作区中各项目自带的多肽毒性相关数据集文件。
+This directory collects peptide toxicity datasets distributed with the source projects.
 
-## 目录规则
+## Organization
 
-- 按项目分目录保存，尽量保留原项目中的相对路径结构。
-- 原项目中的数据路径已经改为软链接，仍可继续被原脚本访问。
-- 详细来源见 `来源说明.csv`。
+Data are grouped by project, preserving the upstream relative directory structure where possible. [sources.csv](sources.csv) records the source repository, original path, path in this release, description, and whether each catalogued file is included.
 
-## 当前已整理内容
+## Included data groups
 
-- `CAPTP/data/` 中的 `train_data.txt`、`test1.txt`、`test2.txt`
-- `StrucToxNet/data/` 全部数据文件
-- `ToxMSRC/Raw data/` 与 `ToxMSRC/Example data/` 全部数据文件
-- `ToxiPep/Dataset/` 全部数据文件
-- `tAMPer/data/` 下的序列与结构数据
+- `CAPTP/data/`: `train_data.txt`, `test1.txt`, and `test2.txt`.
+- `StrucToxNet/data/`: source dataset files.
+- `ToxMSRC/Raw data/` and `ToxMSRC/Example data/`: sequence, label, and example data files.
+- `ToxiPep/Dataset/`: benchmark sequence and label files.
+- `tAMPer/data/`: sequence files and example structures.
 
-## 说明
+The catalogue also identifies source artifacts that are not included, such as generated feature archives. Static vocabularies and model resources belong to their respective implementation directories; the CAPTP token vocabulary is retained at `model/baseline/captp/data/AAindex.pkl` relative to the repository root.
 
-- `CAPTP/data/AAindex.pkl` 和 `CAPTP/data/model_saved.pkl` 未移动，因为它们分别属于特征索引和模型权重，不属于数据集本体。
-- 各项目的来源仓库已在 `来源说明.csv` 中逐项标注。
+Prepared CSV datasets and fixed train/validation/test assignments are in `data/processed/`. The [benchmark analysis plan](ToxiPep_benchmark_analysis_plan.md) describes dataset comparison procedures without bundling historical analysis results.

@@ -1,33 +1,40 @@
-# 基线资源准备
+# Baseline resource preparation
 
-本目录保留原有模型实现、CSV 训练/评估入口、原始示例数据及静态输入定义。
-发布权重、重训练权重、特征缓存、历史预测/日志以及复现检查目录已移除。
-主模型配置见 configs/reproduction；各基线的运行参数通过相应训练入口及配套配置指定。
+This directory contains model implementations, CSV training/evaluation interfaces, original example data, and static input definitions. Released and retrained checkpoints, feature caches, historical predictions, logs, and reproduction-check directories are excluded.
 
-| 方法 | 入口 | 重建或补充的资源 |
+Main-model configurations are in [configs/reproduction](../../configs/reproduction). Baseline parameters are supplied through their training interfaces and accompanying configuration files.
+
+## Required resources
+
+Paths in the following table are relative to `model/baseline/`.
+
+| Method | Entry point | Resources to prepare |
 | --- | --- | --- |
-| ToxiPep | toxipep/Code/train_eval_csv.py | 从 CSV 重新生成原子/图特征并训练 |
-| ToxTeller | toxteller/program_resource/train_eval_csv.py | 从 CSV 重新提取序列特征、拟合 scaler 和分类器 |
-| ToxMSRC | toxmsrc/scripts/train_eval_csv_torch.py | 先恢复原 Word2Vec 模型，再运行 build_word2vec_features.py；自行重新训练 Word2Vec 会改变原始表征 |
-| PLPTP | plptp/scripts/train_eval_csv.py | 从 plptp/model/model 的原作者说明获取 model.pkl，使用 --init-weights；保留 local_models 中的架构与分词配置 |
-| CAPTP | captp/scripts/train_eval_csv.py | AAindex.pkl 是静态 token→编号词表，已保留；可使用 --train-from-scratch，复现历史微调条件则需恢复原发布初始化权重 |
-| tAMPer | tamper/scripts/train_tamper_csv.py | 重新准备 PDB；fair-esm 获取 ESM2-t12-35M；复现原初始化时另需通过 --pre-gnn-checkpoint 提供 pre_GNNs.pt |
-| ToxGIN | toxgin/scripts/train_toxgin_csv.py | 重新准备 PDB；默认从 facebook/esm2_t36_3B_UR50D 获取语言模型；aaindex1.csv 已保留 |
-| PeptiTox | peptitox/train_cached_external.py | 重新准备 PDB/ESM 表征；原提取代码在 run_esm.py、run_esmfold.py、preprocess.py |
-| StrucToxNet | structoxnet/scripts/train_csv.py；structoxnet/scripts/evaluate_csv.py | 准备 ProtT5、ESMFold 与 mkdssp；原始 x_min.npy/x_max.npy 已保留，数据与输出通过命令参数传入；详见 structoxnet/README.md |
-| ToxinPred3 | toxinpred3/scripts/evaluate_csv.py | 保留的是作者发布的预测/评估实现，不包含完整重训练流程；评估前须从原作者发行包恢复模型权重，参阅其 README.md |
+| ToxiPep | `toxipep/Code/train_eval_csv.py` | Generate atom/graph features from the CSV inputs and train the model. |
+| ToxTeller | `toxteller/program_resource/train_eval_csv.py` | Extract sequence features from CSV inputs, then fit the scaler and classifiers. |
+| ToxMSRC | `toxmsrc/scripts/train_eval_csv_torch.py` | Obtain the original Word2Vec model before running `build_word2vec_features.py`. Retraining Word2Vec changes the input representation. |
+| PLPTP | `plptp/scripts/train_eval_csv.py` | Obtain `model.pkl` using the upstream instructions in `plptp/model/model` and supply it with `--init-weights`. Architecture and tokenizer definitions are retained in `local_models/`. |
+| CAPTP | `captp/scripts/train_eval_csv.py` | The static token-to-index vocabulary `AAindex.pkl` is included. Use `--train-from-scratch` for random initialization; reproducing pretrained initialization requires the original released weights. |
+| tAMPer | `tamper/scripts/train_tamper_csv.py` | Prepare PDB structures and obtain ESM2-t12-35M through `fair-esm`. To reproduce the original initialization, provide `pre_GNNs.pt` through `--pre-gnn-checkpoint`. |
+| ToxGIN | `toxgin/scripts/train_toxgin_csv.py` | Prepare PDB structures. The default language model is `facebook/esm2_t36_3B_UR50D`; `aaindex1.csv` is included. |
+| PeptiTox | `peptitox/train_cached.py` | Prepare PDB caches and ESM embeddings. Original feature scripts include `run_esm.py`, `run_esmfold.py`, and `preprocess.py`; see `peptitox/README.md`. |
+| StrucToxNet | `structoxnet/scripts/train_csv.py`, `structoxnet/scripts/evaluate_csv.py` | Prepare ProtT5, ESMFold, and `mkdssp`. Original `x_min.npy`/`x_max.npy` arrays are included. Supply input and output paths through command-line arguments; see `structoxnet/README.md`. |
+| ToxinPred3 | `toxinpred3/scripts/evaluate_csv.py` | The released prediction/evaluation implementation is included; a complete retraining workflow is not provided. Obtain model weights from the upstream distribution before evaluation. |
 
-## 输入与输出
+## Inputs and outputs
 
-共用数据位于项目根目录 data/processed。使用 CSV 中既有 split 列，不重新随机划分测试集。
-主模型及基线的训练超参数、特征来源和初始化方式分别保留，删除权重不表示更改这些实验条件。
-重新训练生成的权重、图、PLM 表征和预测应写入 outputs/ 或显式指定的新输出目录。
-各基线依赖参阅本目录 registry.json 和各模型原有 requirements/environment 文件；无需复制第三方 Python 包源码。
+Shared CSV datasets are in `data/processed/` at the repository root. Use the existing `split` assignments and keep the held-out test sets separate.
 
-## 结构资源
+Model implementations, feature definitions, initialization options, and training parameters are retained. Write newly generated checkpoints, graphs, PLM embeddings, and predictions to `outputs/` or another explicitly selected output directory.
 
-结构预测代码保留在 peptitox/run_esmfold.py 以及 tamper/local_implementation/src/ESMfolding.py。
-后者读取 FASTA，可用 -seqs 指定输入、-out 指定输出 PDB 文件夹。CSV 的 id 和原结构 mapping 列都已保留；
-PDB 文件命名须与所调用入口要求的 id、structoxnet_sample_id 或序列相匹配。
-45 维主模型结构特征还需要 DSSP 与残基接触记录；可用 scripts/prepare_structure_inputs.py 从 PDB 调用 mkdssp 并生成接触记录，再由 scripts/structure_features.py 提取特征；完整命令见项目根目录 README.md。
-结构预测及大模型权重首次获取需要网络与相应计算资源；新预测的结构及训练随机性可能使结果与历史记录有差异。
+Dependencies are listed in [registry.json](registry.json) and the original requirements/environment files in each baseline directory.
+
+## Structure inputs
+
+Structure prediction code is available in `peptitox/run_esmfold.py` and `tamper/local_implementation/src/ESMfolding.py`. The latter accepts FASTA input through `-seqs` and an output PDB directory through `-out`.
+
+CSV sample identifiers and structure-mapping columns are retained. PDB filenames must match the `id`, `structoxnet_sample_id`, or sequence identifier expected by the selected interface.
+
+The main model's 45-dimensional structural descriptors also require DSSP and residue-contact records. From the repository root, use `scripts/prepare_structure_inputs.py` to call `mkdssp` and prepare contact records, then use `scripts/structure_features.py` to extract the descriptors. The [main README](../../README.md#feature-preparation) describes the feature-preparation interface.
+
+Downloading structure-prediction models and language-model weights requires network access and suitable computing resources. Newly predicted structures and stochastic training can produce differences from historical runs.
