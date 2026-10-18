@@ -1,0 +1,11 @@
+id,sequence,toxicity,split,source
+tox_train_1,ALWKTLLKKVLKAAA,1,train,tAMPer
+tox_train_2,ALWKTLLKKVLKA,1,train,tAMPer
+tox_train_3,LKLLKKLLKKLLKLL,1,train,tAMPer
+non_train_1,FKRIVQRIKDFLR,0,train,tAMPer
+non_train_2,KRIVQRIKDFLR,0,train,tAMPer
+non_train_3,ILKKWPWWPWRRK,0,train,tAMPer
+tox_valid_1,KKLFKKILKYL,1,validation,tAMPer
+non_valid_1,VRRFPWWWPFLRR,0,validation,tAMPer
+tox_test_1,RWRWRWRW,1,test,tAMPer
+non_test_1,RLARIVVIRVAR,0,test,tAMPer

@@ -1,0 +1,19 @@
+{
+  "name": "ToxGIN",
+  "seeds": [
+    3407,
+    42,
+    2024
+  ],
+  "selection": "验证集 ACC",
+  "entry": "scripts/train_toxgin_csv.py",
+  "dependencies": "PyTorch、DGL、transformers、tokenizers、Biopandas、NumPy、pandas、scikit-learn；可选 PyG 入口另需 PyG",
+  "scope": "精简版：训练/预测代码、原始数据与静态输入定义。模型权重、缓存和历史输出已移除。",
+  "notes": "DGL CSV 入口对应历史训练代码；evaluate_toxgin_pyg.py 是另一兼容推理实现。historical_extra/ 保留早期训练尝试及缓存。",
+  "relative_directory": "toxgin",
+  "source_archive_directory": "ToxGIN",
+  "shared_paper_data": "../../../data/processed",
+  "saved_run_records": 0,
+  "bundled_weights": false,
+  "preparation": "../PREPARATION.md"
+}

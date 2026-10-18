@@ -1,0 +1,19 @@
+{
+  "name": "ToxTeller",
+  "seeds": [
+    42,
+    123,
+    2024
+  ],
+  "selection": "已拟合的 LR、RF、SVM、XGBoost",
+  "entry": "program_resource/train_eval_csv.py",
+  "dependencies": "scikit-learn、XGBoost、NumPy、pandas；配套保存的 scaler",
+  "scope": "精简版：训练/预测代码、原始数据与静态输入定义。模型权重、缓存和历史输出已移除。",
+  "notes": "历史脚本按长度 10 至 50 过滤，两个测试集样本数为 1334 和 1676。训练样本范围需按历史汇总解释。",
+  "relative_directory": "toxteller",
+  "source_archive_directory": "ToxTeller",
+  "shared_paper_data": "../../../data/processed",
+  "saved_run_records": 0,
+  "bundled_weights": false,
+  "preparation": "../PREPARATION.md"
+}

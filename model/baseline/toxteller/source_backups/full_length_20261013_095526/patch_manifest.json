@@ -1,0 +1,22 @@
+{
+  "changes": [
+    {
+      "path": "/home/cns/HiPepTox/Paper/model/baseline/toxteller/program_resource/train_eval_csv.py",
+      "backup": "/home/cns/HiPepTox/Paper/model/baseline/toxteller/source_backups/full_length_20261013_095526/train_eval_csv.py",
+      "before_sha256": "d0a978108aa937efceb9a16995cd368f8f97b1cf3255fd558c6156d6dd3d63bd",
+      "after_sha256": "cadcf20689e321ecf469e801b3f1ef06a22403d9bf54b73eef349fc5a15479c1"
+    },
+    {
+      "path": "/home/cns/HiPepTox/Paper/model/baseline/toxteller/program_resource/extractfeature.py",
+      "backup": "/home/cns/HiPepTox/Paper/model/baseline/toxteller/source_backups/full_length_20261013_095526/extractfeature.py",
+      "before_sha256": "80903b9b82a65aa98ebcebdcb9b4f1cb71e5ed431cbec804f97aaf80adb8d217",
+      "after_sha256": "782f251db14112239b350cc84df2151bf085fd09cc2f1150de3f4b02f1ff2192"
+    }
+  ],
+  "minimum_length": 5,
+  "maximum_length": 50,
+  "terminal_profile_length": 8,
+  "short_terminal_profile_policy": "zero at unavailable positions; no artificial residue is added",
+  "cpu_workers": 4,
+  "historical_results_preserved": true
+}

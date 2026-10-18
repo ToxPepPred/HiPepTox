@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hipeptox"
+version = "0.1.0"
+description = "Research code for peptide toxicity prediction with heterogeneous peptide graphs and optional PLM/spatial features."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "HiPepTox contributors"}
+]
+keywords = [
+  "peptide",
+  "toxicity",
+  "graph neural network",
+  "protein language model",
+  "bioinformatics"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+dependencies = [
+  "torch>=1.12",
+  "torchdrug==0.2.1",
+  "pyyaml",
+  "easydict",
+  "jinja2",
+  "tqdm",
+  "pandas",
+  "numpy>=1.21,<2",
+  "scipy",
+  "scikit-learn",
+  "ninja"
+]
+
+[project.optional-dependencies]
+plm = ["fair-esm", "transformers", "sentencepiece"]
+dev = ["pytest", "ruff"]
+
+[tool.setuptools.packages.find]
+include = ["model", "model.*", "util", "util.*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"

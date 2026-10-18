@@ -1,0 +1,58 @@
+output_dir: {{ output_dir }}
+
+dataset:
+  class: PeptideToxicity
+  path: {{ dataset_path }}
+  csv_name: peptide_toxicity.csv
+  target_fields: ["toxicity"]
+  view: residue-atom
+  lazy: true
+  augment: none
+  augment_prob: 0.0
+  augment_max_mutations: 1
+  augment_seed: 0
+  plm_embedding_file: {{ plm_embedding_file }}
+  plm_strict: true
+
+task:
+  class: PeptidePropertyPrediction
+  model:
+    class: HiPepTox
+    num_unit: 26
+    num_relation: 8
+    input_dim: 128
+    hidden_dims: [128, 128, 128]
+    concat_hidden: True
+    batch_norm: True
+    activation: gelu
+    readout: dual
+    readout_type: residue
+    use_node_feature: True
+    separate_node_proj: False
+    graph_branch_ignore_plm: True
+    plm_dual_branch: True
+    plm_branch_fusion: concat
+    plm_branch_hidden_dim: 384
+    short_cut: False
+  criterion: ce
+  metric: ["acc", "mcc", "macrof1"]
+  num_mlp_layer: 1
+  num_class: 2
+
+metric: macrof1 [toxicity]
+
+optimizer:
+  class: Adam
+  lr: 5.0e-4
+  weight_decay: 1.0e-3
+
+engine:
+  gpus: {{ gpus }}
+  batch_size: 128
+
+train:
+  num_epoch: 50
+
+scheduler:
+  class: CosineAnnealingLR
+  T_max: 50

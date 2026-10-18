@@ -1,0 +1,14 @@
+# Install matching PyTorch/PyG binary builds for your CPU/CUDA platform first.
+torch
+torch-geometric
+torch-scatter
+torch-cluster
+numpy<2
+pandas
+scipy
+scikit-learn
+transformers
+sentencepiece
+biopython
+tqdm
+accelerate

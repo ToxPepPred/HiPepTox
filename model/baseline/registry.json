@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-18",
+  "root": ".",
+  "scope": "Source code, datasets, static resources and training interfaces. Recorded experiment outputs are excluded.",
+  "models": {
+    "toxipep": {
+      "name": "ToxiPep",
+      "seeds": [
+        42,
+        123,
+        2024
+      ],
+      "selection": "存在验证集 ACC 与外部测试 ACC 扫描两类历史流程；本代码包不包含相应运行记录",
+      "entry": "Code/train_eval_csv.py",
+      "dependencies": "PyTorch、RDKit、NumPy、pandas、scikit-learn",
+      "bundled_weights": false,
+      "directory": "toxipep"
+    },
+    "toxteller": {
+      "name": "ToxTeller",
+      "seeds": [
+        42,
+        123,
+        2024
+      ],
+      "selection": "已拟合的 LR、RF、SVM、XGBoost",
+      "entry": "program_resource/train_eval_csv.py",
+      "dependencies": "scikit-learn、XGBoost、NumPy、pandas；配套保存的 scaler",
+      "bundled_weights": false,
+      "directory": "toxteller"
+    },
+    "toxmsrc": {
+      "name": "ToxMSRC",
+      "seeds": [
+        42,
+        123,
+        2024
+      ],
+      "selection": "PyTorch 历史汇总按验证集 ACC",
+      "entry": "scripts/train_eval_csv_torch.py",
+      "dependencies": "PyTorch、NumPy、pandas、scikit-learn；Word2Vec 特征生成需 gensim；原 Keras 路线另需 TensorFlow",
+      "bundled_weights": false,
+      "directory": "toxmsrc"
+    },
+    "plptp": {
+      "name": "PLPTP",
+      "seeds": [
+        777,
+        123,
+        2024
+      ],
+      "selection": "主要汇总按验证集 ACC",
+      "entry": "scripts/train_eval_csv.py",
+      "dependencies": "PyTorch、transformers、NumPy、pandas、scikit-learn；本地模型配置在 local_models/",
+      "bundled_weights": false,
+      "directory": "plptp"
+    },
+    "captp": {
+      "name": "CAPTP",
+      "seeds": [
+        42,
+        123,
+        2024,
+        7,
+        777,
+        3407
+      ],
+      "selection": "主要统计按验证集 MCC",
+      "entry": "scripts/train_eval_csv.py",
+      "dependencies": "PyTorch、NumPy、pandas、scikit-learn；配套 AAindex 在 data/",
+      "bundled_weights": false,
+      "directory": "captp"
+    },
+    "tamper": {
+      "name": "tAMPer",
+      "seeds": [
+        1,
+        3407,
+        2024
+      ],
+      "selection": "验证集 ACC",
+      "entry": "scripts/train_tamper_csv.py",
+      "dependencies": "PyTorch、PyG、torch-scatter、torch-cluster、fair-esm、Biopython、mkdssp",
+      "bundled_weights": false,
+      "directory": "tamper"
+    },
+    "toxgin": {
+      "name": "ToxGIN",
+      "seeds": [
+        3407,
+        42,
+        2024
+      ],
+      "selection": "验证集 ACC",
+      "entry": "scripts/train_toxgin_csv.py",
+      "dependencies": "PyTorch、DGL、transformers、tokenizers、Biopandas、NumPy、pandas、scikit-learn；可选 PyG 入口另需 PyG",
+      "bundled_weights": false,
+      "directory": "toxgin"
+    },
+    "toxinpred3": {
+      "name": "ToxinPred3",
+      "seeds": [],
+      "selection": "发布模型评估；阈值通过入口参数指定",
+      "entry": "toxinpred3.py",
+      "dependencies": "scikit-learn、NumPy、pandas；motif 模式另需相关工具",
+      "bundled_weights": false,
+      "directory": "toxinpred3"
+    },
+    "peptitox": {
+      "name": "PeptiTox",
+      "directory": "peptitox",
+      "entry": "train_cached_external.py",
+      "bundled_weights": false
+    },
+    "structoxnet": {
+      "name": "StrucToxNet",
+      "directory": "structoxnet",
+      "entry": "scripts/train_csv.py",
+      "evaluation_entry": "scripts/evaluate_csv.py",
+      "selection": "论文表 2 对应历史比较使用验证集 Accuracy；由 --select-metric 显式指定，CSV 通用 CLI 默认值为 MCC",
+      "dependencies": "PyTorch、PyG、torch-scatter、torch-cluster、transformers、ProtT5、ESMFold、Biopython、mkdssp；见 structoxnet/requirements.txt 与 environment.yml",
+      "bundled_weights": false,
+      "source_manifest": "structoxnet/SOURCE.json"
+    }
+  },
+  "shared_data": "../../data/processed",
+  "resource_preparation": "PREPARATION.md"
+}

@@ -1,0 +1,11 @@
+include README.md LICENSE requirements.txt
+recursive-include configs *.yaml
+recursive-include docs *.md
+recursive-include scripts *.py *.sh
+prune archive
+prune data
+prune checkpoints
+prune assets
+prune molecular_dynamics
+recursive-include model/baseline *.md *.txt *.yaml
+recursive-include model/baseline/structoxnet *.py *.md *.txt *.yml *.yaml *.json *.npy

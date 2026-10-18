@@ -1,0 +1,11 @@
+# Fill in confirmed manuscript metadata before renaming this to CITATION.cff.
+cff-version: 1.2.0
+message: "Please cite the HiPepTox manuscript and the released project version."
+title: "HiPepTox"
+type: software
+version: "0.1.0"
+authors:
+  - family-names: "REPLACE_WITH_CONFIRMED_AUTHOR"
+    given-names: "REPLACE_WITH_CONFIRMED_GIVEN_NAMES"
+# doi: "ADD_CONFIRMED_DOI"
+# repository-code: "ADD_CONFIRMED_PUBLIC_REPOSITORY_URL"

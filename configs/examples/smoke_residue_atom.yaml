@@ -1,0 +1,45 @@
+output_dir: {{ output_dir }}
+
+dataset:
+  class: PeptideToxicity
+  path: {{ dataset_path }}
+  csv_name: peptide_toxicity.csv
+  target_fields: ["toxicity"]
+  view: residue-atom
+  lazy: false
+  augment: none
+
+task:
+  class: PeptidePropertyPrediction
+  model:
+    class: HiPepTox
+    num_unit: 26
+    num_relation: 8
+    input_dim: 64
+    hidden_dims: [64, 64]
+    concat_hidden: true
+    batch_norm: false
+    activation: relu
+    readout: dual
+    readout_type: residue
+    use_node_feature: true
+    short_cut: false
+  criterion: ce
+  metric: ["acc", "mcc", "macrof1"]
+  num_mlp_layer: 1
+  mlp_hidden_dims: [64]
+  num_class: 2
+
+metric: macrof1 [toxicity]
+
+optimizer:
+  class: Adam
+  lr: 1.0e-3
+  weight_decay: 0
+
+engine:
+  gpus: {{ gpus }}
+  batch_size: 4
+
+train:
+  num_epoch: 1

@@ -1,0 +1,11 @@
+torch>=1.12
+torchdrug==0.2.1
+pyyaml
+easydict
+jinja2
+tqdm
+pandas
+numpy>=1.21,<2
+scipy
+scikit-learn
+ninja

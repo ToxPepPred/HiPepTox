@@ -1,0 +1,32 @@
+# PeptiTox training configuration.
+# Relative paths are resolved from the project root.
+schema_version: 1
+method: PeptiTox
+dataset: cdhit08
+paths_relative_to: project_root
+parameters:
+  train_data_dir: "data/processed/toxipep08_internal_85_15"
+  external_data_dir: "data/processed/toxipep08_external_test"
+  plm_embedding_file: "data/processed/toxipep08_esm2_t28_29_30_mean_embeddings.pt"
+  output_dir: "results/peptitox/cdhit08/seed2024"
+  internal_cache_dir: "assets/structure/structure_cache/toxipep08_internal_85_15_cache"
+  external_cache_dir: "assets/structure/structure_cache/toxipep08_external_test_eval_gpu_fixed"
+  epochs: 100
+  patience: 20
+  batch_size: 128
+  lr: 0.0001
+  weight_decay: 0.001
+  dropout: 0.2
+  hidden_dim: 128
+  num_layers: 4
+  augment_eps: 0.1
+  radius: 15.0
+  seed: 2024
+  device: "cuda"
+  limit_train: 0
+  limit_valid: 0
+  limit_external: 0
+model_reference:
+  plm_dim: 640
+  node_input_dim: 824
+  edge_input_dim: 450

@@ -1,0 +1,160 @@
+{
+  "name": "StrucToxNet",
+  "integrated_on": "2026-10-18",
+  "upstream_repository": "https://github.com/jiaoshihu/StrucToxNet",
+  "source_project": "/home/cns/StrucToxNet",
+  "source_git_commit": "c53788adc45a8c134d116520c94d8c5120574f10",
+  "snapshot": "Existing local research checkout, including its CSV train/evaluate adapters; not claimed to be a pristine upstream checkout.",
+  "source_license_file": null,
+  "model_source_unchanged": true,
+  "portability_changes": [
+    "CSV train/evaluate default mkdssp is resolved from PATH; --mkdssp remains available."
+  ],
+  "weights_included": false,
+  "feature_caches_included": false,
+  "static_normalization_arrays": [
+    "Preprocessing/inputs/x_min.npy",
+    "Preprocessing/inputs/x_max.npy"
+  ],
+  "files": [
+    {
+      "path": "Preprocessing/1_preprocess.py",
+      "source_sha256": "cce9ea9d89a8e0e5d090769cb4ff43db13cff0f2daef9b64470cfa99168646fc",
+      "packaged_sha256": "cce9ea9d89a8e0e5d090769cb4ff43db13cff0f2daef9b64470cfa99168646fc",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/2_get_features.py",
+      "source_sha256": "3f36d57e5dbecba3fb40e81128d0cc848930333c33733a25b864c3cb936b7a56",
+      "packaged_sha256": "3f36d57e5dbecba3fb40e81128d0cc848930333c33733a25b864c3cb936b7a56",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/3_get_plm.py",
+      "source_sha256": "84e48f6172a891e6c3ac23db8f84d7c65555c96a1c20dd315f5863609fccf2d6",
+      "packaged_sha256": "84e48f6172a891e6c3ac23db8f84d7c65555c96a1c20dd315f5863609fccf2d6",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/4_feature_all.py",
+      "source_sha256": "b2157e9c824da54ffce1ae1f47e0879e97716a8d3bf96f6e1baff9108bd53787",
+      "packaged_sha256": "b2157e9c824da54ffce1ae1f47e0879e97716a8d3bf96f6e1baff9108bd53787",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/feature_script/feature_1.py",
+      "source_sha256": "663a83b295f4d2a3a3f77a39f43f15850d8d51875ce491ce1c45b7b0477a273c",
+      "packaged_sha256": "663a83b295f4d2a3a3f77a39f43f15850d8d51875ce491ce1c45b7b0477a273c",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/feature_script/feature_2.py",
+      "source_sha256": "750b7f57a742674c99ea68344cd0e0e68dbdbc4db72f43f1ccd7900a56cd2092",
+      "packaged_sha256": "750b7f57a742674c99ea68344cd0e0e68dbdbc4db72f43f1ccd7900a56cd2092",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/feature_script/feature_3.py",
+      "source_sha256": "aa1ce8bdb6fb9897f7c4a96e0242adf88250e713c5dea89994f2e4a7a49f643d",
+      "packaged_sha256": "aa1ce8bdb6fb9897f7c4a96e0242adf88250e713c5dea89994f2e4a7a49f643d",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/feature_script/feature_4.py",
+      "source_sha256": "fd35670b1899c02891b8ab99b12182d0ab2211f7396f75e83e04cd2f7d3b4c02",
+      "packaged_sha256": "fd35670b1899c02891b8ab99b12182d0ab2211f7396f75e83e04cd2f7d3b4c02",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/feature_script/feature_5.py",
+      "source_sha256": "dc52f68492847880f5ee776edfa99ccd426cb6c08bde2727ec6986f99d833532",
+      "packaged_sha256": "dc52f68492847880f5ee776edfa99ccd426cb6c08bde2727ec6986f99d833532",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/feature_script/feature_6.py",
+      "source_sha256": "811780f4a111c9de2ea20b198dbd8d94e0390171a20490004d29d0798f468f39",
+      "packaged_sha256": "811780f4a111c9de2ea20b198dbd8d94e0390171a20490004d29d0798f468f39",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/inputs/test_sequences.txt",
+      "source_sha256": "057949571f46f0ac0bb364e6957f52a7614325625f2ef441537ffb38176e2139",
+      "packaged_sha256": "057949571f46f0ac0bb364e6957f52a7614325625f2ef441537ffb38176e2139",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/inputs/x_max.npy",
+      "source_sha256": "8b204c833ce1f11dbb86cde3c3905c3600cab6939b10c612f8fa100de21ae9f3",
+      "packaged_sha256": "8b204c833ce1f11dbb86cde3c3905c3600cab6939b10c612f8fa100de21ae9f3",
+      "modified_for_portability": false
+    },
+    {
+      "path": "Preprocessing/inputs/x_min.npy",
+      "source_sha256": "6d8b75e14e67d67615c521a0fbf61052950cccb39e22a0c7c46976bd110dd134",
+      "packaged_sha256": "6d8b75e14e67d67615c521a0fbf61052950cccb39e22a0c7c46976bd110dd134",
+      "modified_for_portability": false
+    },
+    {
+      "path": "configuration/config.py",
+      "source_sha256": "9f865f70861a72b63dbb37e7d3fb5236dd01dcc8b5324efb4a1fbf41e9cac0a1",
+      "packaged_sha256": "9f865f70861a72b63dbb37e7d3fb5236dd01dcc8b5324efb4a1fbf41e9cac0a1",
+      "modified_for_portability": false
+    },
+    {
+      "path": "environment.yml",
+      "source_sha256": "09fa93c28d143d883c595246a1afb8753c918b172f5cca38e8ca62940f51bdb1",
+      "packaged_sha256": "09fa93c28d143d883c595246a1afb8753c918b172f5cca38e8ca62940f51bdb1",
+      "modified_for_portability": false
+    },
+    {
+      "path": "main.py",
+      "source_sha256": "98f4b10a8f9c716c36e7aa07e2fe5702735704532defcaf1e98bec57b8a2826e",
+      "packaged_sha256": "98f4b10a8f9c716c36e7aa07e2fe5702735704532defcaf1e98bec57b8a2826e",
+      "modified_for_portability": false
+    },
+    {
+      "path": "model/StrucToxNet.py",
+      "source_sha256": "caa8c22f9837576e9394a6fb101ea59e226c01a8e07d6fdafea0048526a8d0e4",
+      "packaged_sha256": "caa8c22f9837576e9394a6fb101ea59e226c01a8e07d6fdafea0048526a8d0e4",
+      "modified_for_portability": false
+    },
+    {
+      "path": "model/__init__.py",
+      "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "packaged_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modified_for_portability": false
+    },
+    {
+      "path": "preprocess/data_processing.py",
+      "source_sha256": "0e0d9df752396a19e9998133a888a4c136efb5d054dbe5cd58ad049f76ee7105",
+      "packaged_sha256": "0e0d9df752396a19e9998133a888a4c136efb5d054dbe5cd58ad049f76ee7105",
+      "modified_for_portability": false
+    },
+    {
+      "path": "scripts/evaluate_csv.py",
+      "source_sha256": "e8c0ee3a96720daae82c6324312a348c20fb4eff8d9b9063807a16144abb9be0",
+      "packaged_sha256": "11ec16d830ce76145d1428833c4e8cf61772befaed582518c3ba3e5801dc20b4",
+      "modified_for_portability": true
+    },
+    {
+      "path": "scripts/train_csv.py",
+      "source_sha256": "2ee5e92c1c2fd7fb2d571150bd2b717eb6ecd29a74f7d632ed54ecf0f72eb742",
+      "packaged_sha256": "4c09dc01d0173791fae20e6f290e0d575ac7c74f7d97286513af11dabdfae712",
+      "modified_for_portability": true
+    },
+    {
+      "path": "util/util_metric.py",
+      "source_sha256": "059688a36b386a2ab9104dbd382fedc3e87ab2a733bea897da0c80243d01bc2c",
+      "packaged_sha256": "059688a36b386a2ab9104dbd382fedc3e87ab2a733bea897da0c80243d01bc2c",
+      "modified_for_portability": false
+    },
+    {
+      "path": "README.upstream.md",
+      "source_path": "README.md",
+      "source_sha256": "9f5b77ce520d8e0379a53960fc3fdd3b9ab05d75cf86d9f40b7eec1d0ef64888",
+      "packaged_sha256": "9f5b77ce520d8e0379a53960fc3fdd3b9ab05d75cf86d9f40b7eec1d0ef64888",
+      "modified_for_portability": false
+    }
+  ]
+}

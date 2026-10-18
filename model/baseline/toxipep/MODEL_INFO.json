@@ -1,0 +1,19 @@
+{
+  "name": "ToxiPep",
+  "seeds": [
+    42,
+    123,
+    2024
+  ],
+  "selection": "存在验证集 ACC 与外部测试 ACC 扫描两类历史流程；本代码包不包含相应运行记录",
+  "entry": "Code/train_eval_csv.py",
+  "dependencies": "PyTorch、RDKit、NumPy、pandas、scikit-learn",
+  "scope": "精简版：训练/预测代码、原始数据与静态输入定义。模型权重、缓存和历史输出已移除。",
+  "notes": "名称含 externalscan 的运行按外部测试集扫描最佳点，发表时需与验证集选模结果区分。",
+  "relative_directory": "toxipep",
+  "source_archive_directory": "ToxiPep_SOTA",
+  "shared_paper_data": "../../../data/processed",
+  "saved_run_records": 0,
+  "bundled_weights": false,
+  "preparation": "../PREPARATION.md"
+}

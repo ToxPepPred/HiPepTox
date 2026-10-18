@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+models/
+outputs/
+results/
+result/
+*.pth
+*.pt
+*.pkl
+Preprocessing/outputs/
+Preprocessing/inputs/pdb/
+Preprocessing/inputs/dssp/
